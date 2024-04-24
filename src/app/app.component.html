@@ -1,0 +1,97 @@
+<div class="container pt-3">
+  <div class="mt-2 p-1 bg-primary text-white rounded text-center">
+    <h1>ToDo App - ANGULAR 17</h1>
+    <p>Advance Version With Filter</p>
+  </div>
+  <div class="row">
+    <div class="col-6 pt-2">
+      <input type="text" class="form-control" [(ngModel)]="taskObj.taskName" placeholder="Task Name">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 pt-2">
+      <textarea class="form-control" rows="3" [(ngModel)]="taskObj.taskDescription"
+        placeholder="Task Description"></textarea>
+    </div>
+  </div>
+  <div class="row pt-2">
+    <div class="col-2">
+      <input type="date" id="textDate" class="form-control" [(ngModel)]="taskObj.dueDate" placeholder="Due Date">
+
+    </div>
+    <div class="col-6">
+      <input type="text" [(ngModel)]="taskObj.tags" placeholder="Enter Comma Separated tags" class="form-control">
+    </div>
+    <div class="col">
+      @if(taskObj.itemId == 0) {
+      <button class="btn btn-success" (click)="addTask()">Add Task</button>
+      } @else {
+      <button class="btn btn-warning" (click)="updateTask()">Update</button>
+      }
+    </div>
+  </div>
+  <div class="row pt-4">
+    <div class="col">
+      <button class="btn btn-primary btn-sm">Filter by Tags</button>
+      <button class="btn btn-secondary btn-sm">Show All</button>
+      <button class="btn btn-secondary btn-sm">Show Completed</button>
+    </div>
+  </div>
+  <div class="row pt-4">
+    <div class="col">
+      <button class="btn btn-secondary btn-sm">Tags Group</button>
+      <button class="btn btn-secondary btn-sm">default</button>
+      <button class="btn btn-secondary btn-sm">Hobby</button>
+      <button class="btn btn-success btn-sm">Holiday</button>
+      <button class="btn btn-success text-light btn-sm">Financial</button>
+      <button class="btn btn-secondary btn-sm">Fun</button>
+      <button class="btn btn-success btn-sm">Emergency</button>
+      <button class="btn btn-secondary btn-sm text-light">Health</button>
+      <button class="btn btn-success btn-sm">Work</button>
+      <button class="btn btn-success btn-sm">Education</button>
+      <button class="btn btn-success btn-sm">Social</button>
+      <button class="btn btn-success btn-sm">Travel</button>
+
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col-12">
+      <table class="table table-bordered table-striped table-sm">
+        <thead>
+          <tr>
+            <th><strong>Index</strong></th>
+            <th><strong>Task Name</strong></th>
+            <th><strong>Due Date</strong></th>
+            <th class="text-center"><strong>Tags</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of taskList; track 'itemId'){
+          <tr>
+            <td style="text-align: center;">{{$index + 1}}</td>
+            <td>
+              <div class="row">
+                <div class="col-1">
+                  <input type="checkbox">
+                </div>
+                <div class="col-6">
+                  {{item.taskName}}
+                </div>
+                <div class="col-4 text-end">
+                  <i class="fa fa-close text-secondary px-3 text-danger">x</i>
+                </div>
+              </div>
+            </td>
+            <td>{{item.dueDate |date:'dd-MM-yyyy'}}</td>
+            <td class="text-center">
+              <button class="btn btn-warning btn-sm rounded-btn" (click)="onEdit(item)">Edit</button>
+              <button class="btn btn-danger btn-sm rounded-btn" (click)="onDelete(item.itemId)">Delete</button>
+            </td>
+          </tr>
+          }
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
